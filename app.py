@@ -56,7 +56,7 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-# --- 2. БАЗА ДАННЫХ АКТИВОВ ---
+# --- 2. БАЗА ДАННЫХ ---
 DB = {
     "USA": ["AAPL", "NVDA", "TSLA", "MSFT", "AMZN", "AMD", "NFLX", "GOOGL", "META", "INTC", "CRM", "AVGO", "QCOM", "PYPL", "TSM"],
     "CHINA": ["BABA", "TCEHY", "PDD", "JD", "BIDU", "NIO", "LI", "BYDDY", "BILI", "NTES", "GDS", "ZLAB", "KC", "IQ", "TME"],
@@ -65,71 +65,53 @@ DB = {
     "RUSSIA": ["SBER.ME", "GAZP.ME", "LKOH.ME", "YNDX", "ROSN.ME", "MGNT.ME", "NVTK.ME", "GMKN.ME", "CHMF.ME", "PLZL.ME", "TATN.ME", "MTSS.ME", "AFLT.ME", "ALRS.ME", "VTBR.ME"]
 }
 
-# --- БАЗА ДАННЫХ 10 БРОКЕРОВ ---
 BROKERS_DB = {
     "Interactive Brokers": {
-        "trust": 99.2, "history": "Основан в 1978. Пионеры электронного трейдинга.",
-        "founder": "Thomas Peterffy", "fact": "Основатель считается отцом цифровой торговли.",
-        "lawsuits": "Штраф $38 млн в 2020 за пробелы в AML-комплаенсе.", "license": "SEC, FINRA, FCA",
-        "fees": "От $0.005 за акцию", "withdraw": "1-3 дня", "assets": "Акции, Опционы, Фьючерсы"
+        "trust": 99.2,
+        "history": "Founded in 1978 as T.P. & Co. Pioneered electronic trading.",
+        "founder": "Thomas Peterffy",
+        "fact": "Peterffy is known as the father of digital trading.",
+        "lawsuits": "Fined $38M in 2020 for AML compliance failures.",
+        "license": "SEC, FINRA, FCA, ASIC",
+        "fees": "From $0.005 per share",
+        "withdraw": "1-3 Days",
+        "assets": "Stocks, Options, Futures, Crypto, Bonds"
     },
     "Freedom Finance": {
-        "trust": 94.5, "history": "Часть холдинга Freedom Holding Corp, листинг на NASDAQ.",
-        "founder": "Timur Turlov", "fact": "Единственный брокер из СНГ с листингом на NASDAQ.",
-        "lawsuits": "Атака шорт-селлеров Hindenburg, аудит подтвердил надежность.", "license": "SEC, CySEC, AFSA",
-        "fees": "0.02% в среднем", "withdraw": "Мгновенно на карту Freedom", "assets": "Акции, IPO, Облигации"
-    },
-    "Charles Schwab": {
-        "trust": 98.1, "history": "Сделали трейдинг доступным для масс с 1975 года.",
-        "founder": "Charles Schwab", "fact": "Купили своего конкурента TD Ameritrade за $26 млрд.",
-        "lawsuits": "Штраф $187 млн за скрытые комиссии в робо-эдвайзинге.", "license": "SEC, FINRA",
-        "fees": "$0 для акций США", "withdraw": "2-3 дня", "assets": "Акции, ETF, Банкинг"
-    },
-    "Fidelity": {
-        "trust": 98.8, "history": "Гигант управления активами с 1946 года.",
-        "founder": "Edward Johnson II", "fact": "Управляют активами на сумму более $4 трлн.",
-        "lawsuits": "Иски по поводу комиссий в пенсионных планах 401(k).", "license": "SEC, FINRA",
-        "fees": "$0 комиссии", "withdraw": "1-3 дня", "assets": "Акции, Крипто, Пенсионные счета"
-    },
-    "Saxo Bank": {
-        "trust": 96.7, "history": "Датский инвестбанк, лидер онлайн-торговли в Европе.",
-        "founder": "Kim Fournais", "fact": "Первыми запустили торговую платформу в Дании (1992).",
-        "lawsuits": "Претензии регулятора по управлению рисками ликвидности.", "license": "FCA, FSC, FSA",
-        "fees": "Средние по рынку", "withdraw": "1-2 дня", "assets": "Forex, CFDs, Акции"
+        "trust": 94.5,
+        "history": "Part of Freedom Holding Corp, listed on NASDAQ.",
+        "founder": "Timur Turlov",
+        "fact": "The only broker from Central Asia listed on NASDAQ.",
+        "lawsuits": "Survived Hindenburg Research short-seller attack with clean audits.",
+        "license": "SEC, CySEC, AFSA",
+        "fees": "0.02% per trade (varies by plan)",
+        "withdraw": "Instant to Freedom Card / 1-2 Days bank",
+        "assets": "Stocks, IPO Access, ETFs, Bonds"
     },
     "Tinkoff (RU)": {
-        "trust": 88.5, "history": "Создали крупнейшую инвестиционную соцсеть в РФ.",
-        "founder": "Oleg Tinkov", "fact": "Самый большой цифровой банк в мире без отделений.",
-        "lawsuits": "Санкционные ограничения и смена владельцев в 2022.", "license": "ЦБ РФ",
-        "fees": "0.3% - 0.025%", "withdraw": "Мгновенно", "assets": "Акции РФ, Валюта, Драгметаллы"
+        "trust": 88.5,
+        "history": "Revolutionized retail investing in Russia with a mobile-first approach.",
+        "founder": "Oleg Tinkov",
+        "fact": "World's largest digital-only bank in terms of customers.",
+        "lawsuits": "Faced legal battles regarding ownership transfer in 2022.",
+        "license": "Central Bank of Russia",
+        "fees": "0.3% (Basic) to 0.025% (Premium)",
+        "withdraw": "Instant 24/7",
+        "assets": "Russian Stocks, Currency, Precious Metals"
     },
     "Halyk Finance (KZ)": {
-        "trust": 92.3, "history": "Инвестиционное крыло крупнейшего банка Казахстана.",
-        "founder": "Halyk Bank Group", "fact": "Часть банка со столетней историей.",
-        "lawsuits": "Мелкие административные штрафы за отчетность.", "license": "АРРФР (РК)",
-        "fees": "0.02% - 0.05%", "withdraw": "1 рабочий день", "assets": "KASE, AIX, ETF"
-    },
-    "Swissquote": {
-        "trust": 97.4, "history": "Ведущий онлайн-банк Швейцарии.",
-        "founder": "Marc Bürki", "fact": "Публичная компания, торгуется на швейцарской бирже.",
-        "lawsuits": "Убытки во время 'Черного лебедя' франка в 2015.", "license": "FINMA",
-        "fees": "Премиальные тарифы", "withdraw": "1-2 дня", "assets": "Global Stocks, Forex, Crypto"
-    },
-    "E*TRADE": {
-        "trust": 95.0, "history": "Первыми провели электронную сделку для частника.",
-        "founder": "William Porter", "fact": "Знамениты своей рекламой с 'говорящим ребенком'.",
-        "lawsuits": "Штрафы FINRA за защиту данных клиентов.", "license": "SEC, FINRA",
-        "fees": "$0 для акций", "withdraw": "2-3 дня", "assets": "Акции, Опционы, Сбережения"
-    },
-    "Robinhood": {
-        "trust": 85.2, "history": "Основан в 2013 с целью 'демократизации финансов'.",
-        "founder": "Vlad Tenev", "fact": "Ввели моду на нулевые комиссии.",
-        "lawsuits": "Штраф $70 млн от FINRA за системные сбои в 2021.", "license": "SEC, FINRA",
-        "fees": "$0 (модель PFOF)", "withdraw": "Мгновенно (платные) / 3 дня", "assets": "Акции, Крипто, Опционы"
+        "trust": 92.3,
+        "history": "Investment arm of the largest financial group in Kazakhstan.",
+        "founder": "Halyk Bank Group",
+        "fact": "Manages significant part of national pension assets.",
+        "lawsuits": "Minor regulatory fines for administrative delays.",
+        "license": "ARDFM (Kazakhstan)",
+        "fees": "0.02% - 0.05% on KASE/AIX",
+        "withdraw": "1 Business Day",
+        "assets": "Local Stocks (KASE/AIX), International ETFs"
     }
 }
 
-# --- 3. ФУНКЦИИ ---
 def get_daily_key():
     return datetime.now().strftime("%Y-%m-%d")
 
@@ -145,7 +127,6 @@ def fetch_all(m_name, daily_key):
             r_map["₸"] = float(rates_raw["KZT=X"].dropna().iloc[-1])
         except: pass
         eur_usd = float(rates_raw["EURUSD=X"].dropna().iloc[-1]) if not rates_raw["EURUSD=X"].dropna().empty else 1.08
-        
         clean = []
         for t in tickers:
             try:
@@ -176,8 +157,9 @@ def analyze_news(query, daily_key, l):
         return results
     except: return []
 
-# --- 4. ИНТЕРФЕЙС ---
+# --- 3. ИНТЕРФЕЙС RILLET ---
 st.sidebar.markdown('<div class="logo-text">RILLET</div>', unsafe_allow_html=True)
+
 mode = st.sidebar.selectbox("MODE / РЕЖИМ", [txt["market"], txt["brokers"]])
 
 if mode == txt["market"]:
@@ -187,7 +169,6 @@ if mode == txt["market"]:
     assets, rates = fetch_all(m_name, daily_token)
     sign = c_choice.split("(")[1][0]
     r_val = rates.get(sign, 1.0)
-
     if not assets:
         st.error("Data unavailable / Данные недоступны")
     else:
@@ -198,7 +179,6 @@ if mode == txt["market"]:
         view[txt["price"]] = (view["P_USD"] * r_val).apply(lambda x: f"{x:,.2f} {sign}")
         view[txt["forecast"]] = view["PROFIT_EST"].apply(lambda x: f"{x:+.2f}%")
         st.dataframe(view[["T", txt["price"], txt["forecast"]]], use_container_width=True, height=250)
-
         st.divider()
         t_sel = st.selectbox(txt["select"], df_main["T"].tolist())
         item = next(x for x in assets if x['T'] == t_sel)
@@ -209,16 +189,13 @@ if mode == txt["market"]:
         f_prices = [p * r_val for p in st.session_state.f_pts]
         pct = ((f_prices[-1] / p_now) - 1) * 100
         clr = "#00ffcc" if pct > 0.5 else ("#ff4b4b" if pct < -0.5 else "#ffcc00")
-
         c1, c2, c3 = st.columns(3)
         c1.markdown(f"<div class='metric-card'>{txt['current']}<br><h3>{p_now:,.2f} {sign}</h3></div>", unsafe_allow_html=True)
         c2.markdown(f"<div class='metric-card'>{txt['target']}<br><h3>{f_prices[-1]:,.2f} {sign}</h3></div>", unsafe_allow_html=True)
         c3.markdown(f"<div class='metric-card' style='border-color:{clr}'>{txt['profit']}<br><h3>{pct:+.2f}%</h3></div>", unsafe_allow_html=True)
-
         st.write(f"#### {txt['chart_title']} {t_sel}")
         hist = item['DF']['Close'].tail(15).values * r_val / (item['P_USD'] * r_val / p_now)
         st.line_chart(np.append(hist, f_prices), color="#00ffcc")
-
         st.divider()
         st.write(f"#### 🧠 {txt['news_title']} {t_sel}")
         news_data = analyze_news(t_sel, daily_token, lang)
@@ -233,7 +210,8 @@ if mode == txt["market"]:
                     <span class="{s_class}">{entry['sent']}</span> | <span style="color:#888;">{entry['src']}</span>
                 </div>
                 """, unsafe_allow_html=True)
-            pos, neg = len([x for x in news_data if x['sent'] == "POSITIVE"]), len([x for x in news_data if x['sent'] == "NEGATIVE"])
+            pos = len([x for x in news_data if x['sent'] == "POSITIVE"])
+            neg = len([x for x in news_data if x['sent'] == "NEGATIVE"])
             res_text = txt["buy"] if pos > neg else (txt["sell"] if neg > pos else txt["hold"])
             st.markdown(f"<h2 style='text-align:center; border:2px solid {clr}; padding:15px; border-radius:10px;'>{txt['signal']}: {res_text}</h2>", unsafe_allow_html=True)
         else:
@@ -242,9 +220,11 @@ if mode == txt["market"]:
 elif mode == txt["brokers"]:
     st.write(f"## 🏛️ {txt['brokers']}")
     sorted_brokers = sorted(BROKERS_DB.items(), key=lambda x: x[1]['trust'], reverse=True)
+    
     for broker, info in sorted_brokers:
         trust = info['trust']
-        bar_color = "#00ffcc" if trust > 90 else ("#ffcc00" if trust > 85 else "#ff4b4b")
+        bar_color = "#00ffcc" if trust > 90 else "#ffcc00"
+        
         st.markdown(f"""
         <div class="analysis-card" style="margin-bottom:0px; border-bottom:none; border-radius:10px 10px 0 0;">
             <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -261,6 +241,7 @@ elif mode == txt["brokers"]:
             </div>
         </div>
         """, unsafe_allow_html=True)
+        
         with st.expander(txt["details"]):
             col_a, col_b = st.columns(2)
             with col_a:
@@ -270,6 +251,11 @@ elif mode == txt["brokers"]:
             with col_b:
                 st.markdown(f"**💡 {txt['fact']}:** {info['fact']}")
                 st.markdown(f"**⚖️ {txt['lawsuits']}:** <span style='color:#ff4b4b;'>{info['lawsuits']}</span>", unsafe_allow_html=True)
-        st.markdown(f"""<div style="background-color: #111; height: 5px; border-radius: 5px; margin-bottom: 25px;"><div style="background-color: {bar_color}; width: {trust}%; height: 100%; border-radius: 5px;"></div></div>""", unsafe_allow_html=True)
+            
+        st.markdown(f"""
+        <div style="background-color: #111; height: 5px; border-radius: 5px; margin-bottom: 25px;">
+            <div style="background-color: {bar_color}; width: {trust}%; height: 100%; border-radius: 5px;"></div>
+        </div>
+        """, unsafe_allow_html=True)
 
 st.caption(f"{txt['update']}: {get_daily_key()} 00:00")
